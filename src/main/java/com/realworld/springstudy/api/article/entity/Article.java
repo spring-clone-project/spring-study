@@ -18,6 +18,7 @@ import java.util.List;
 )
 @EqualsAndHashCode
 @Builder
+@ToString
 public class Article extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_seq_gen")

@@ -3,10 +3,11 @@ spring:
     name: study-hard
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
     password: mysecretpassword
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update # table auto make and auto drop # command create-drop # command update
     database: postgresql
     properties:
       hibernate:
