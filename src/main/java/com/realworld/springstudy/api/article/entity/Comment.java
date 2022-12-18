@@ -24,7 +24,7 @@ public class Comment extends BaseEntity {
     private String body;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false) // author_id fk컬럼을 만들겠다는것
     private User author;
 
     @ManyToOne(fetch = FetchType.LAZY)

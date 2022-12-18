@@ -1,6 +1,7 @@
 package com.realworld.springstudy.api.article.controller;
 
 import com.realworld.springstudy.api.article.dto.ArticleRequest;
+import com.realworld.springstudy.api.article.dto.CommentRequest;
 import com.realworld.springstudy.api.article.entity.Article;
 import com.realworld.springstudy.api.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,15 @@ public class ArticleController {
 
         System.out.println(articleBySlug);
         return articleBySlug;
+    }
+
+    @GetMapping("/articles/{slug}/comments")
+    public Article addComments(@PathVariable String slug){
+
+        System.out.println("들어오나?");
+        Article articles = articleService.addComments(slug);
+
+        return articles;
     }
 
 }

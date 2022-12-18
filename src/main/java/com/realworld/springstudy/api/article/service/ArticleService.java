@@ -1,6 +1,7 @@
 package com.realworld.springstudy.api.article.service;
 
 import com.realworld.springstudy.api.article.dto.ArticleRequest;
+import com.realworld.springstudy.api.article.dto.CommentRequest;
 import com.realworld.springstudy.api.article.entity.Article;
 import com.realworld.springstudy.api.article.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,13 @@ public class ArticleService {
     }
 
     public Article getArticleBySlug(String slug) {
+        return articleRepository.findBySlug(slug);
+
+    }
+
+    public Article addComments(String slug){
+        //Article.ArticleBuilder builder = Article.builder();
+
         return articleRepository.findBySlug(slug);
 
     }
