@@ -3,7 +3,7 @@ package com.realworld.springstudy.api.article.dto;
 public class ArticleRequest {
     private String title;
     private String description;
-    private  String body;
+    private String body;
 
     public String getTitle() {
         return title;

@@ -1,6 +1,7 @@
 package com.realworld.springstudy.api.article.controller;
 
 import com.realworld.springstudy.api.article.dto.ArticleRequest;
+import com.realworld.springstudy.api.article.dto.ArticleUpdateRequest;
 import com.realworld.springstudy.api.article.entity.Article;
 import com.realworld.springstudy.api.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -40,4 +41,13 @@ public class ArticleController {
         return articleBySlug;
     }
 
+    @PutMapping("/articles/{slug}")
+    public void updateArticleBySlug(@PathVariable String slug, @RequestBody ArticleUpdateRequest body) {
+        articleService.updateArticleBySlug(slug, body);
+    }
+
+    @DeleteMapping("/articles/{slug}")
+    public void deleteArticlesBySlug(@PathVariable String slug){
+        articleService.deleteArticlesBySlug(slug);
+    }
 }
