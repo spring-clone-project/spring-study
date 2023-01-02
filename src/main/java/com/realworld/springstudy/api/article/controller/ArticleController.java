@@ -50,4 +50,13 @@ public class ArticleController {
     public void deleteArticlesBySlug(@PathVariable String slug){
         articleService.deleteArticlesBySlug(slug);
     }
+
+    @GetMapping("/articles/{slug}/comments")
+    public void addComments(@PathVariable String slug) {
+        System.out.println("들어옴1");
+        articleService.addComments(slug);
+
+    }
+
+
 }
