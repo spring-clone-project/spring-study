@@ -42,12 +42,10 @@ public class ArticleController {
     }
 
     @GetMapping("/articles/{slug}/comments")
-    public Article addComments(@PathVariable String slug){
+    public void addComments(@PathVariable String slug) {
+        System.out.println("들어옴1");
+        articleService.addComments(slug);
 
-        System.out.println("들어오나?");
-        Article articles = articleService.addComments(slug);
-
-        return articles;
     }
 
 }
