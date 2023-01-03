@@ -41,10 +41,10 @@ public class ArticleController {
         return articleBySlug;
     }
 
-    @GetMapping("/articles/{slug}/comments")
-    public void addComments(@PathVariable String slug) {
-        System.out.println("들어옴1");
-        articleService.addComments(slug);
+    @PostMapping("/articles/{slug}/comments")
+    public void addComments(@PathVariable String slug, @RequestBody CommentRequest commentRequest) {
+
+        articleService.addComments(slug,commentRequest);
 
     }
 
