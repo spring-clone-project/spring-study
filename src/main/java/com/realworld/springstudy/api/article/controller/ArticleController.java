@@ -2,6 +2,7 @@ package com.realworld.springstudy.api.article.controller;
 
 import com.realworld.springstudy.api.article.dto.ArticleRequest;
 import com.realworld.springstudy.api.article.dto.ArticleUpdateRequest;
+import com.realworld.springstudy.api.article.dto.CommentRequest;
 import com.realworld.springstudy.api.article.entity.Article;
 import com.realworld.springstudy.api.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -51,11 +52,9 @@ public class ArticleController {
         articleService.deleteArticlesBySlug(slug);
     }
 
-    @GetMapping("/articles/{slug}/comments")
-    public void addComments(@PathVariable String slug) {
-        System.out.println("들어옴1");
-        articleService.addComments(slug);
-
+    @PostMapping("/articles/{slug}/comments")
+    public void addComments(@PathVariable String slug, @RequestBody CommentRequest commentRequest) {
+        articleService.addComments(slug,commentRequest);
     }
 
 
