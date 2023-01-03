@@ -3,11 +3,13 @@ package com.realworld.springstudy.api.article.service;
 import com.realworld.springstudy.api.article.dto.ArticleRequest;
 
 import com.realworld.springstudy.api.article.dto.ArticleUpdateRequest;
+import com.realworld.springstudy.api.article.dto.CommentRequest;
 import com.realworld.springstudy.api.article.entity.Article;
 import com.realworld.springstudy.api.article.entity.Article.ArticleBuilder;
 import com.realworld.springstudy.api.article.entity.Comment;
 import com.realworld.springstudy.api.article.repository.ArticleRepository;
 import com.realworld.springstudy.api.article.repository.CommentRepository;
+import com.realworld.springstudy.api.user.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,16 +82,27 @@ public class ArticleService {
         articleRepository.deleteById(entity.getId());
     }
 
-    public void addComments(String slug){
+    public void addComments(String slug, CommentRequest commentRequest){
 
-        System.out.println("슬러그 : " + slug);
-        System.out.println("들어옴2");
+        // comment에 해당하는 article객체를 가져오는
+        Article articleBySlug = this.getArticleBySlug(slug);
+
+        // 가라 데이터(유저 가짜로 만들기)
+        User.UserBuilder userBuilder = User.builder();
+        userBuilder.id(1L);
+        userBuilder.bio("testBio");
+        userBuilder.name("testName");
+        userBuilder.email("test@test.com");
+        userBuilder.password("testPassword");
+
+        //Comment 만들기 (빌더로)
         Comment.CommentBuilder builder = Comment.builder();
-        builder.body(slug);
+        builder.article(articleBySlug);
+        builder.author(userBuilder.build());
+        builder.body(commentRequest.getBody());
 
-        Comment build = builder.build();
-        System.out.println("들어옴3");
-        commentRepository.save(build);
+        commentRepository.save(builder.build());
+
 
     }
 }
