@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     Comment findByArticle(Article article);
+
+    Comment findByArticleAndId(Article article, Long id);
 }

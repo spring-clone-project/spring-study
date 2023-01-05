@@ -63,11 +63,13 @@ public class ArticleController {
         Article articleBySlug = articleService.getArticleBySlug(slug);
 
         Comment commentByArticle = articleService.getCommentByArticle(articleBySlug);
-        System.out.println("테스트 시작");
-        System.out.println(articleBySlug.getId());
-        System.out.println(commentByArticle.getId());
+
         return commentByArticle;
 
     }
 
+    @DeleteMapping("/articles/{slug}/comments/{commentId}")
+    public void deleteCommentsBySlugAndId(@PathVariable String slug, @PathVariable Long commentId){
+        articleService.deleteCommentsBySlugAndId(slug,commentId);
+    }
 }

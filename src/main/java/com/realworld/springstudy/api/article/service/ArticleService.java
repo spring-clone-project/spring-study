@@ -107,4 +107,13 @@ public class ArticleService {
         return commentRepository.findByArticle(article);
     }
 
+    @Transactional
+    public void deleteCommentsBySlugAndId(String slug, Long commentId) {
+
+        Article articleEntity = articleRepository.findBySlug(slug);
+
+        Comment commentEntity = commentRepository.findByArticleAndId(articleEntity, commentId);
+
+        commentRepository.deleteById(commentEntity.getId());
+    }
 }
