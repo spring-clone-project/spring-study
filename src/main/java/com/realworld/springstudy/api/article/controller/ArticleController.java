@@ -1,6 +1,7 @@
 package com.realworld.springstudy.api.article.controller;
 
 import com.realworld.springstudy.api.article.dto.ArticleRequest;
+import com.realworld.springstudy.api.article.dto.ArticleUpdateRequest;
 import com.realworld.springstudy.api.article.dto.CommentRequest;
 import com.realworld.springstudy.api.article.entity.Article;
 import com.realworld.springstudy.api.article.entity.Comment;
@@ -41,6 +42,16 @@ public class ArticleController {
         return articleBySlug;
     }
 
+    @PutMapping("/articles/{slug}")
+    public void updateArticleBySlug(@PathVariable String slug, @RequestBody ArticleUpdateRequest body) {
+        articleService.updateArticleBySlug(slug, body);
+    }
+
+    @DeleteMapping("/articles/{slug}")
+    public void deleteArticlesBySlug(@PathVariable String slug){
+        articleService.deleteArticlesBySlug(slug);
+    }
+
     @PostMapping("/articles/{slug}/comments")
     public void addComments(@PathVariable String slug, @RequestBody CommentRequest commentRequest) {
         articleService.addComments(slug,commentRequest);
@@ -58,4 +69,5 @@ public class ArticleController {
         return commentByArticle;
 
     }
+
 }
