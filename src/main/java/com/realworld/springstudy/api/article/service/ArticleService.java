@@ -48,7 +48,6 @@ public class ArticleService {
 
     public Article getArticleBySlug(String slug) {
         return articleRepository.findBySlug(slug);
-
     }
 
     public void addComments(String slug, CommentRequest commentRequest){
@@ -71,7 +70,10 @@ public class ArticleService {
         builder.body(commentRequest.getBody());
 
         commentRepository.save(builder.build());
-
-
     }
+
+    public Comment getCommentByArticle(Article article) {
+        return commentRepository.findByArticle(article);
+    }
+
 }
