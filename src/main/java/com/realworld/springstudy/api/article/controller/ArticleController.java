@@ -4,6 +4,7 @@ import com.realworld.springstudy.api.article.dto.ArticleRequest;
 import com.realworld.springstudy.api.article.dto.ArticleUpdateRequest;
 import com.realworld.springstudy.api.article.dto.CommentRequest;
 import com.realworld.springstudy.api.article.entity.Article;
+import com.realworld.springstudy.api.article.entity.Comment;
 import com.realworld.springstudy.api.article.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,6 @@ public class ArticleController {
 
         Article articleBySlug = articleService.getArticleBySlug(slug);
 
-        System.out.println(articleBySlug);
         return articleBySlug;
     }
 
@@ -57,5 +57,19 @@ public class ArticleController {
         articleService.addComments(slug,commentRequest);
     }
 
+    @GetMapping("/articles/{slug}/comments")
+    public Comment getCommentsBySlug(@PathVariable String slug) {
 
+        Article articleBySlug = articleService.getArticleBySlug(slug);
+
+        Comment commentByArticle = articleService.getCommentByArticle(articleBySlug);
+
+        return commentByArticle;
+
+    }
+
+    @DeleteMapping("/articles/{slug}/comments/{commentId}")
+    public void deleteCommentsBySlugAndId(@PathVariable String slug, @PathVariable Long commentId){
+        articleService.deleteCommentsBySlugAndId(slug,commentId);
+    }
 }

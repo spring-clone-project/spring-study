@@ -52,7 +52,6 @@ public class ArticleService {
 
     public Article getArticleBySlug(String slug) {
         return articleRepository.findBySlug(slug);
-
     }
 
     @Transactional // 트랜잭션을 하겠다고 명시하는 어노테이션 (begin과 commit 처리를 하겠다는것)
@@ -102,7 +101,19 @@ public class ArticleService {
         builder.body(commentRequest.getBody());
 
         commentRepository.save(builder.build());
+    }
 
+    public Comment getCommentByArticle(Article article) {
+        return commentRepository.findByArticle(article);
+    }
 
+    @Transactional
+    public void deleteCommentsBySlugAndId(String slug, Long commentId) {
+
+        Article articleEntity = articleRepository.findBySlug(slug);
+
+        Comment commentEntity = commentRepository.findByArticleAndId(articleEntity, commentId);
+
+        commentRepository.deleteById(commentEntity.getId());
     }
 }
