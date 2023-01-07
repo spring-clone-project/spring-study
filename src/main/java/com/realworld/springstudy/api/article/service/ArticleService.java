@@ -7,8 +7,10 @@ import com.realworld.springstudy.api.article.dto.CommentRequest;
 import com.realworld.springstudy.api.article.entity.Article;
 import com.realworld.springstudy.api.article.entity.Article.ArticleBuilder;
 import com.realworld.springstudy.api.article.entity.Comment;
+import com.realworld.springstudy.api.article.entity.Favorite;
 import com.realworld.springstudy.api.article.repository.ArticleRepository;
 import com.realworld.springstudy.api.article.repository.CommentRepository;
+import com.realworld.springstudy.api.article.repository.FavoriteRepository;
 import com.realworld.springstudy.api.user.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +22,15 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final CommentRepository commentRepository;
+    private final FavoriteRepository favoriteRepository;
 
-    public ArticleService(ArticleRepository articleRepository, CommentRepository commentRepository) {
+    public ArticleService(ArticleRepository articleRepository,
+                          CommentRepository commentRepository,
+                          FavoriteRepository favoriteRepository) {
+
         this.articleRepository = articleRepository;
         this.commentRepository = commentRepository;
+        this.favoriteRepository = favoriteRepository;
     }
 
     public void addArticles(ArticleRequest articleRequest) {
@@ -116,4 +123,33 @@ public class ArticleService {
 
         commentRepository.deleteById(commentEntity.getId());
     }
+
+    public void addFavorite(String slug){
+        //TODO 가라 데이터(유저 가짜로 만들기) Spring Security 추가 예정
+        User.UserBuilder userBuilder = User.builder();
+        userBuilder.id(1L);
+        userBuilder.bio("testBio");
+        userBuilder.name("testName");
+        userBuilder.email("test@test.com");
+        userBuilder.password("testPassword");
+
+        // 슬러그로 아티클 찾기
+        Article article = articleRepository.findBySlug(slug);
+
+        // 페이버릿 빌드하기
+        Favorite.FavoriteBuilder builder = Favorite.builder();
+        builder.user(userBuilder.build());
+        builder.article(article);
+
+        favoriteRepository.save(builder.build());
+    }
+
+    @Transactional
+    public void deleteFavoriteBySlug(String slug) {
+
+        Favorite favoriteEntity = favoriteRepository.findBySlug(slug);
+
+        favoriteRepository.deleteById(favoriteEntity.getId());
+    }
+
 }

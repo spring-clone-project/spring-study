@@ -68,4 +68,14 @@ public class ArticleController {
     public void deleteCommentsBySlugAndId(@PathVariable String slug, @PathVariable Long commentId){
         articleService.deleteCommentsBySlugAndId(slug,commentId);
     }
+
+    @PostMapping("/articles/{slug}/favorite")
+    public void addFavorite(@PathVariable String slug) {
+        articleService.addFavorite(slug);
+    }
+
+    @DeleteMapping("/articles/{slug}/favorite")
+    public void deleteFavoriteBySlug(@PathVariable String slug){
+        articleService.deleteFavoriteBySlug(slug);
+    }
 }
