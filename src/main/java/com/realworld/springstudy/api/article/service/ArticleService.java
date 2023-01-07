@@ -103,8 +103,8 @@ public class ArticleService {
         commentRepository.save(builder.build());
     }
 
-    public Comment getCommentByArticle(Article article) {
-        return commentRepository.findByArticle(article);
+    public List<Comment> getCommentBySlug(String slug) {
+        return commentRepository.findBySlug(slug);
     }
 
     @Transactional

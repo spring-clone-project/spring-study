@@ -58,13 +58,9 @@ public class ArticleController {
     }
 
     @GetMapping("/articles/{slug}/comments")
-    public Comment getCommentsBySlug(@PathVariable String slug) {
+    public List<Comment> getCommentsBySlug(@PathVariable String slug) {
 
-        Article articleBySlug = articleService.getArticleBySlug(slug);
-
-        Comment commentByArticle = articleService.getCommentByArticle(articleBySlug);
-
-        return commentByArticle;
+        return articleService.getCommentBySlug(slug);
 
     }
 
