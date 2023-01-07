@@ -12,26 +12,19 @@ import com.realworld.springstudy.api.article.repository.ArticleRepository;
 import com.realworld.springstudy.api.article.repository.CommentRepository;
 import com.realworld.springstudy.api.article.repository.FavoriteRepository;
 import com.realworld.springstudy.api.user.entity.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final CommentRepository commentRepository;
     private final FavoriteRepository favoriteRepository;
-
-    public ArticleService(ArticleRepository articleRepository,
-                          CommentRepository commentRepository,
-                          FavoriteRepository favoriteRepository) {
-
-        this.articleRepository = articleRepository;
-        this.commentRepository = commentRepository;
-        this.favoriteRepository = favoriteRepository;
-    }
 
     public void addArticles(ArticleRequest articleRequest) {
         ArticleBuilder builder = Article.builder();
